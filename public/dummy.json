@@ -1,0 +1,1 @@
+{ "sites": [{ "name": "Vite", "description": "Next Generation Frontend Tooling", "url": "https://vitejs.dev/", "tags": ["tooling", "react"] }, { "name": "Lucide", "description": "Beautiful & consistent icons", "url": "https://lucide.dev", "tags": ["design", "icons"] }]}
