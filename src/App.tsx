@@ -31,7 +31,7 @@ function App() {
   };
 
   useEffect(() => {
-    document.title = import.meta.env.VITE_SITE_NAME || 'Company Resource Hub';
+    document.title = import.meta.env.VITE_SITE_NAME || 'Useful 2.0';
 
     // Apply custom accent colors if defined
     const root = document.documentElement;

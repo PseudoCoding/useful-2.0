@@ -38,7 +38,7 @@ app.get('/api/data', limiter, async (req, res) => {
         'Accept': mode === 'git'
             ? 'application/vnd.github.v3.raw, application/json, application/yaml, text/plain'
             : 'application/json, application/yaml, text/yaml, text/plain',
-        'User-Agent': 'Resource-Hub-Proxy'
+        'User-Agent': 'Useful-2-Proxy'
     };
 
     if (mode === 'git' && token) {
