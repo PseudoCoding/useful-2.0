@@ -1,10 +1,12 @@
-# Company Resource Hub
+# Useful 2.0
 
-A modern, fast, and secure Single Page Application (SPA) designed to act as an internal directory for your company's URLs, tools, and documentation.
+A modern, fast, and secure Single Page Application (SPA) designed to act as an internal directory for your organization's URLs, tools, and documentation.
 
 Built with **React, TypeScript, and Vite**, this application supports rich, beautiful aesthetics and instant text/tag filtering. 
 
-It is designed with flexibility in mind—it can fetch the directory configuration via a standard REST API, or securely pull it directly from a private Git repository (e.g., GitHub) using authentication tokens.
+It is designed with flexibility in mind and it can fetch the directory configuration via a standard REST API, or securely pull it directly from a private Git repository (e.g., GitHub) using authentication tokens.
+
+For those who know and love the original Useful project, this is a complete rewrite with a modern UI and better performance.
 
 ## Getting Started (Local Development)
 
@@ -18,7 +20,7 @@ Create a `.env` file in the root directory.
 
 #### Basic Configuration (Optional branding)
 ```env
-VITE_SITE_NAME="My Resource Hub"
+VITE_SITE_NAME="Useful 2.0"
 VITE_SITE_LOGO="https://example.com/logo.png"
 
 # Custom Theme Colors (Supports HEX, RGB, HSL, or named colors)
@@ -93,7 +95,7 @@ It builds the static React SPA, and then serves it via a lightweight Express.js 
 
 ### Building the Image
 ```bash
-docker build -t company-resource-hub .
+docker build -t useful-2. .
 ```
 
 ### Running the Image
@@ -104,7 +106,7 @@ docker run -p 8080:8080 \
   -e VITE_DATA_MODE=git \
   -e VITE_DATA_URL=https://api.github.com/repos/your-org/repo/contents/data.yaml \
   -e VITE_GIT_TOKEN=github_pat_xxxxxx \
-  company-resource-hub
+  useful
 ```
 
 Access the hub at `http://localhost:8080`.
