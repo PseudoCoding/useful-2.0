@@ -1,5 +1,9 @@
 # Useful 2.0
 
+<div align="center">
+  <img src="./assets/screenshot.png" alt="Useful 2.0 Dashboard" width="100%">
+</div>
+
 A modern, fast, and secure Single Page Application (SPA) designed to act as an internal directory for your organization's URLs, tools, and documentation.
 
 Built with **React, TypeScript, and Vite**, this application supports rich, beautiful aesthetics and instant text/tag filtering. 
@@ -117,3 +121,7 @@ Unit tests are written using Vitest to verify data parsing and component renderi
 ```bash
 npm run test
 ```
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).

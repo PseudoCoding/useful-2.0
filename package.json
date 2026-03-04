@@ -1,7 +1,8 @@
 {
   "name": "useful-2.0",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
