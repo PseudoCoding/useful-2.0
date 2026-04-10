@@ -1,22 +1,22 @@
-import React from 'react';
 import type { Site } from '../types';
 import { ExternalLink } from 'lucide-react';
+import styles from './ResourceCard.module.css';
 
 interface ResourceCardProps {
     site: Site;
     index: number;
 }
 
-export const ResourceCard: React.FC<ResourceCardProps> = ({ site, index }) => {
-    // Sanitize URL to prevent javascript: URI XSS
-    const isSafeUrl = (url: string) => {
-        try {
-            const parsedUrl = new URL(url, window.location.origin);
-            return ['http:', 'https:', 'mailto:'].includes(parsedUrl.protocol);
-        } catch {
-            return false;
-        }
-    };
+function isSafeUrl(url: string): boolean {
+    try {
+        const parsed = new URL(url, window.location.origin);
+        return ['http:', 'https:', 'mailto:'].includes(parsed.protocol);
+    } catch {
+        return false;
+    }
+}
+
+export function ResourceCard({ site, index }: ResourceCardProps) {
     const safeHref = isSafeUrl(site.url) ? site.url : '#';
 
     return (
@@ -24,46 +24,23 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ site, index }) => {
             href={safeHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-panel glass-panel-hover animate-fade-in"
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '1.5rem',
-                textDecoration: 'none',
-                color: 'inherit',
-                animationDelay: `${index * 0.05}s`
-            }}
+            className={styles.card}
+            style={{ '--animation-delay': `${index * 0.04}s` } as React.CSSProperties}
         >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-                <h3 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', margin: 0 }}>
-                    {site.name}
-                </h3>
-                <ExternalLink size={20} color="var(--text-secondary)" style={{ opacity: 0.7 }} />
+            <div className={styles.cardHeader}>
+                <h3 className={styles.cardTitle}>{site.name}</h3>
+                <ExternalLink size={16} className={styles.cardIcon} />
             </div>
 
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', flexGrow: 1, marginBottom: '1.5rem', lineHeight: 1.6 }}>
-                {site.description}
-            </p>
+            <p className={styles.cardDescription}>{site.description}</p>
 
             {site.tags && site.tags.length > 0 && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: 'auto' }}>
+                <div className={styles.tags}>
                     {site.tags.map(tag => (
-                        <span key={tag} style={{
-                            background: 'rgba(99, 102, 241, 0.1)',
-                            border: '1px solid rgba(99, 102, 241, 0.2)',
-                            color: 'var(--accent-hover)',
-                            padding: '0.25rem 0.75rem',
-                            borderRadius: '9999px',
-                            fontSize: '0.75rem',
-                            fontWeight: 500,
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.05em'
-                        }}>
-                            {tag}
-                        </span>
+                        <span key={tag} className={styles.tag}>{tag}</span>
                     ))}
                 </div>
             )}
         </a>
     );
-};
+}

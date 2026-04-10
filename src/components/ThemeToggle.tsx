@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
+import styles from './ThemeToggle.module.css';
 
-export const ThemeToggle: React.FC = () => {
+export function ThemeToggle() {
     const [theme, setTheme] = useState<'light' | 'dark'>(() => {
         if (typeof window !== 'undefined') {
             const savedTheme = localStorage.getItem('theme');
@@ -13,11 +14,7 @@ export const ThemeToggle: React.FC = () => {
 
     useEffect(() => {
         const root = window.document.documentElement;
-        if (theme === 'dark') {
-            root.setAttribute('data-theme', 'dark');
-        } else {
-            root.setAttribute('data-theme', 'light');
-        }
+        root.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
     }, [theme]);
 
@@ -26,25 +23,15 @@ export const ThemeToggle: React.FC = () => {
     };
 
     return (
-        <div className="tooltip-container">
+        <div className={styles.wrapper}>
             <button
                 onClick={toggleTheme}
-                className="glass-panel glass-panel-hover"
-                style={{
-                    width: '3.5rem',
-                    height: '3.5rem',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    cursor: 'pointer',
-                    padding: 0
-                }}
-                aria-label="Toggle Theme"
+                className={styles.button}
+                aria-label="Toggle theme"
             >
-                {theme === 'dark' ? <Sun size={24} color="var(--accent-hover)" /> : <Moon size={24} color="var(--accent-hover)" />}
+                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
             </button>
-            <span className="tooltip-text">Toggle Theme</span>
+            <span className={styles.tooltip}>Toggle theme</span>
         </div>
     );
-};
+}

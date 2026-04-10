@@ -43,9 +43,11 @@ export async function fetchHubConfig(forceRefresh = false): Promise<HubConfig> {
     };
 
     if (mode === 'git') {
-        // If fetching from Github API, we need the raw accept header to get the file contents
-        // instead of the base64 encoded API response.
         headers['Accept'] = 'application/vnd.github.v3.raw, application/json, application/yaml, text/plain';
+        const token = import.meta.env.VITE_GIT_TOKEN;
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
     }
 
     try {

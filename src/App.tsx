@@ -8,6 +8,7 @@ import { FloatingActions } from './components/FloatingActions';
 import { Footer } from './components/Footer';
 import { NotificationBanner } from './components/NotificationBanner';
 import { AlertCircle, Loader2 } from 'lucide-react';
+import styles from './App.module.css';
 
 function App() {
   const [config, setConfig] = useState<HubConfig | null>(null);
@@ -100,63 +101,42 @@ function App() {
   return (
     <>
       <NotificationBanner />
-      <div className="container">
+      <div className={styles.container}>
         <Header />
 
-        <main>
+        <main className={styles.main}>
           {loading && (
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '4rem 0', color: 'var(--text-secondary)' }}>
-              <Loader2 size={48} className="animate-spin" style={{ animation: 'spin 1.5s linear infinite', marginBottom: '1rem', color: 'var(--accent-primary)' }} />
-              <p style={{ fontSize: '1.25rem' }}>Loading resources...</p>
-              <style>{`@keyframes spin { 100% { transform: rotate(360deg); } }`}</style>
+            <div className={styles.loading}>
+              <Loader2 size={36} className={styles.loadingIcon} />
+              <p className={styles.loadingText}>Loading resources...</p>
             </div>
           )}
 
           {error && (
-            <div className="glass-panel animate-fade-in" style={{ padding: '2rem', display: 'flex', alignItems: 'center', gap: '1rem', borderLeft: '4px solid #ef4444', backgroundColor: 'rgba(239, 68, 68, 0.1)' }}>
-              <AlertCircle color="#ef4444" size={32} />
-              <div>
-                <h3 style={{ margin: '0 0 0.5rem 0', color: '#fca5a5' }}>Error Loading Configuration</h3>
-                <p style={{ margin: 0, color: '#fecaca' }}>{error}</p>
+            <div className={styles.errorPanel}>
+              <AlertCircle size={20} className={styles.errorIcon} />
+              <div className={styles.errorContent}>
+                <h3>Failed to load</h3>
+                <p>{error}</p>
               </div>
             </div>
           )}
 
           {config && !loading && !error && (
-            <div className="animate-fade-in animate-delay-2">
+            <div className={styles.content}>
               <SearchBar onSearch={handleSearch} availableTags={availableTags} />
 
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-                gap: '1.5rem',
-                marginTop: '2rem'
-              }}>
+              <div className={styles.grid}>
                 {filteredSites.map((site, index) => (
                   <ResourceCard key={site.url + site.name} site={site} index={index} />
                 ))}
               </div>
 
               {filteredSites.length === 0 && (
-                <div style={{ textAlign: 'center', padding: '4rem 0', color: 'var(--text-secondary)' }}>
-                  <p style={{ fontSize: '1.25rem' }}>No resources found matching your criteria.</p>
-                  <button
-                    onClick={() => handleSearch('', [])}
-                    style={{
-                      marginTop: '1rem',
-                      background: 'transparent',
-                      border: '1px solid var(--accent-primary)',
-                      color: 'var(--accent-primary)',
-                      padding: '0.75rem 1.5rem',
-                      borderRadius: '8px',
-                      cursor: 'pointer',
-                      fontSize: '1rem',
-                      transition: 'all 0.2s'
-                    }}
-                    onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--accent-primary)'; e.currentTarget.style.color = '#fff'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--accent-primary)'; }}
-                  >
-                    Clear Filters
+                <div className={styles.empty}>
+                  <p className={styles.emptyText}>No resources match your search.</p>
+                  <button className={styles.clearButton} onClick={() => handleSearch('', [])}>
+                    Clear filters
                   </button>
                 </div>
               )}
