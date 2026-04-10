@@ -43,7 +43,8 @@
   box-shadow: var(--shadow-card);
 }
 
-.wrapper:hover .tooltip {
+.wrapper:hover .tooltip,
+.wrapper:focus-within .tooltip {
   visibility: visible;
   opacity: 1;
   transform: translateY(-50%) translateX(0);

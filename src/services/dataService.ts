@@ -44,10 +44,6 @@ export async function fetchHubConfig(forceRefresh = false): Promise<HubConfig> {
 
     if (mode === 'git') {
         headers['Accept'] = 'application/vnd.github.v3.raw, application/json, application/yaml, text/plain';
-        const token = import.meta.env.VITE_GIT_TOKEN;
-        if (token) {
-            headers['Authorization'] = `Bearer ${token}`;
-        }
     }
 
     try {

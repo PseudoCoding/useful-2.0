@@ -56,6 +56,7 @@ export function SearchBar({ onSearch, availableTags }: SearchBarProps) {
                                 key={tag}
                                 onClick={() => toggleTag(tag)}
                                 className={`${styles.tag}${selectedTags.includes(tag) ? ` ${styles.tagActive}` : ''}`}
+                                aria-pressed={selectedTags.includes(tag)}
                             >
                                 {tag}
                             </button>

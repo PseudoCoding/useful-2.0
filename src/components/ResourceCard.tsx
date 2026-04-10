@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import type { Site } from '../types';
 import { ExternalLink } from 'lucide-react';
 import styles from './ResourceCard.module.css';
@@ -25,7 +26,7 @@ export function ResourceCard({ site, index }: ResourceCardProps) {
             target="_blank"
             rel="noopener noreferrer"
             className={styles.card}
-            style={{ '--animation-delay': `${index * 0.04}s` } as React.CSSProperties}
+            style={{ '--animation-delay': `${index * 0.04}s` } as CSSProperties}
         >
             <div className={styles.cardHeader}>
                 <h3 className={styles.cardTitle}>{site.name}</h3>
