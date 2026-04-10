@@ -76,4 +76,31 @@ sites:
             }
         });
     });
+
+    it('does not include Authorization header in git mode even when VITE_GIT_TOKEN is set', async () => {
+        vi.stubEnv('VITE_DATA_MODE', 'git');
+        vi.stubEnv('VITE_GIT_TOKEN', 'my-secret-token');
+
+        vi.mocked(fetch).mockResolvedValue({
+            ok: true,
+            text: () => Promise.resolve(mockJson)
+        } as unknown as Response);
+
+        await fetchHubConfig();
+
+        const calledHeaders = (vi.mocked(fetch).mock.calls[0][1] as RequestInit).headers as Record<string, string>;
+        expect(calledHeaders).not.toHaveProperty('Authorization');
+    });
+
+    it('does not include Authorization header when mode is api', async () => {
+        vi.mocked(fetch).mockResolvedValue({
+            ok: true,
+            text: () => Promise.resolve(mockJson)
+        } as unknown as Response);
+
+        await fetchHubConfig();
+
+        const calledHeaders = (vi.mocked(fetch).mock.calls[0][1] as RequestInit).headers as Record<string, string>;
+        expect(calledHeaders).not.toHaveProperty('Authorization');
+    });
 });
